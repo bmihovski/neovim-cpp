@@ -92,3 +92,5 @@ sed -i '/^vim.cmd("MasonInstallAll")$/d' ~/.config/nvim/init.lua
 echo -e "${GREEN}-==Removing necessary files==-${NC}"
 # Remove the cloned directory
 rm -rf ../neovim-cpp
+rm -rf ~/.config/nvim/.git
+rm -rf ~/.config/nvim/.github
