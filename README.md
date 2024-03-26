@@ -17,7 +17,7 @@ To install Neovim CPP, follow these steps:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/dreamsofcode-io/neovim-cpp.git --depth 1
+git clone https://github.com/bmihovski/neovim-cpp.git --depth 1
 ```
 2. Change to the project directory:
   ```bash
