@@ -2,7 +2,7 @@ local plugins = {
   {
     "rcarriga/nvim-dap-ui",
     event = "VeryLazy",
-    dependencies = "mfussenegger/nvim-dap",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")
@@ -36,10 +36,11 @@ local plugins = {
     end
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = "VeryLazy",
+    dependencies = "nvim-lua/plenary.nvim",
     opts = function()
-      return require "custom.configs.null-ls"
+      return require "custom.configs.none-ls"
     end,
   },
   {
