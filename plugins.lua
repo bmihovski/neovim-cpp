@@ -40,7 +40,7 @@ local plugins = {
     event = "VeryLazy",
     dependencies = "nvim-lua/plenary.nvim",
     opts = function()
-      return require "custom.configs.none-ls"
+      return require "custom.configs.null-ls"
     end,
   },
   {
