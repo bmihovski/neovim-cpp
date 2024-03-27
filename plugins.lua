@@ -36,6 +36,9 @@ local plugins = {
     opts = {
       debug = true, -- Enable debugging
     },
+    build = function()
+      vim.cmd("UpdateRemotePlugins") -- You need to restart to make it works
+    end,
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
