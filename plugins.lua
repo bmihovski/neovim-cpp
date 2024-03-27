@@ -26,6 +26,13 @@ local plugins = {
     },
   },
   {
+    "karb94/neoscroll.nvim",
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+  },
+  {
     "CopilotC-Nvim/CopilotChat.nvim",
     event = "VeryLazy",
     branch = "canary",
