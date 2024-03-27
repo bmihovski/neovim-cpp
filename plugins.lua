@@ -19,19 +19,31 @@ local plugins = {
     end
   },
   {
+    "Civitasv/cmake-tools.nvim",
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    event = "VeryLazy",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    },
+    opts = {
+      debug = true, -- Enable debugging
+    },
+  },
+  {
     "jay-babu/mason-nvim-dap.nvim",
     event = "VeryLazy",
     dependencies = {
       "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
     },
-    opts = {
-      handlers = {}
-    },
-  },
-  {
-    "Civitasv/cmake-tools.nvim",
-    event = "VeryLazy",
     opts = {
       handlers = {}
     },
@@ -64,6 +76,8 @@ local plugins = {
         "clangd",
         "clang-format",
         "codelldb",
+        "cmakelint",
+        "cpptools"
       }
     }
   }
