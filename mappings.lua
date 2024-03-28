@@ -24,6 +24,10 @@ M.dap = {
     ["<F9>"] = {
       "<cmd> DapContinue <CR>",
       "Start or continue the debugger",
+    },
+    ["<leader>k"] = {
+      "<cmd> DapTerminate <CR>",
+      "Stop the debugger",
     }
   }
 }
