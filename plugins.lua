@@ -34,6 +34,13 @@ local plugins = {
     },
   },
   {
+    "booperlv/nvim-gomove",
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+  },
+  {
     "karb94/neoscroll.nvim",
     event = "VeryLazy",
     opts = {
