@@ -19,6 +19,14 @@ local plugins = {
     end
   },
   {
+    "theHamsta/nvim-dap-virtual-text",
+    event = "VeryLazy",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "mfussenegger/nvim-dap" },
+    opts = {
+      handlers = {}
+    }
+  },
+  {
     "Civitasv/cmake-tools.nvim",
     event = "VeryLazy",
     opts = {
