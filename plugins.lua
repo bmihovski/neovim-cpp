@@ -19,6 +19,14 @@ local plugins = {
     end
   },
   {
+    "nvim-telescope/telescope-dap.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "mfussenegger/nvim-dap", "nvim-telescope/telescope.nvim" },
+    opts = {
+      handlers = {}
+    }
+  },
+  {
     "theHamsta/nvim-dap-virtual-text",
     event = "VeryLazy",
     dependencies = { "nvim-treesitter/nvim-treesitter", "mfussenegger/nvim-dap" },
@@ -56,7 +64,7 @@ local plugins = {
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     opts = {
-      debug = true, -- Enable debugging
+      debug = false, -- Disable debugging
     },
     build = function()
       vim.cmd("UpdateRemotePlugins") -- You need to restart to make it works
