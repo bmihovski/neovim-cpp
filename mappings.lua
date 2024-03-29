@@ -28,7 +28,18 @@ M.dap = {
     ["<leader>k"] = {
       "<cmd> DapTerminate <CR>",
       "Stop the debugger",
-    }
+    },
+    ["<leader>q"] = {
+      "<cmd> lua require'dap'.clear_breakpoints() <CR>",
+      "Clear breakpoints",
+    },
+    ["<leader>w"] = {
+      function()
+        local input = vim.fn.input "Conditional breakpoint: "
+        require('dap').toggle_breakpoint(input)
+      end,
+      "Create conditional breakpoint",
+    },
   }
 }
 
