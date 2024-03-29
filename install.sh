@@ -17,11 +17,11 @@ fi
 
 . /etc/os-release
 
-if [ "$ID" = "arch" ]; then
-   read -p "looks like you are on arch linux. would you like to install jetbrains nerd font? (yes/no) " response
+if [ "$ID" = "ubuntu" ]; then
+   read -p "looks like you are on Ubuntu linux. would you like to install jetbrains nerd font? (yes/no) " response
    case "$response" in
     [yY][eE][sS]|[yY]) 
-        sudo pacman -S ttf-jetbrains-mono-nerd
+        bash -c  "$(curl -fsSL https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-installer/main/install.sh)"
      ;;
  *)
      echo -e "${RED}Skipping nerd font installation...${NC}"

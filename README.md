@@ -25,7 +25,7 @@ cd neovim-cpp
 ```
 3. Run the shell script to install the dependencies:
 ```bash
-sh install.sh
+./install.sh
 ```
 
 ## Usage
