@@ -37,6 +37,7 @@ M.dap = {
       function()
         local input = vim.fn.input "Conditional breakpoint: "
         require('dap').toggle_breakpoint(input)
+        return "<cr>"
       end,
       "Create conditional breakpoint",
     },
