@@ -10,7 +10,7 @@ local keymap = vim.api.nvim_set_keymap
 -- cmake run
 keymap("n", "<leader>d", "<cmd> CMakeDebug <CR>", { noremap = true, silent = true })
 keymap("n", "<leader>f", "<cmd> CMakeRun <CR>", { noremap = true, silent = true })
-keymap("n", "<leader>s", "<cmd> CMakeCloseRunner <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>s", "<cmd> CMakeCloseExecutor <CR><cmd> CMakeCloseRunner <CR>", { noremap = true, silent = true })
 -- copilot chat
 keymap("n", "<leader>a", "<cmd> CopilotChatToggle <CR>", { noremap = true, silent = true })
 -- telescope
