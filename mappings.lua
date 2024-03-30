@@ -33,13 +33,17 @@ M.dap = {
       "<cmd> lua require'dap'.clear_breakpoints() <CR>",
       "Clear breakpoints",
     },
+    ["<leader>h"] = {
+      function() require"dap.ui.widgets".hover() end,
+      "Variables",
+    },
     ["<leader>w"] = {
-      function()
-        local input = vim.fn.input "Conditional breakpoint: "
-        require('dap').toggle_breakpoint(input)
-        return "<cr>"
-      end,
+      "<cmd> lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: ')) <CR>",
       "Create conditional breakpoint",
+    },
+    ["<leader>l"] = {
+      "<cmd> lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) <CR>",
+      "Create log point breakpoint",
     },
   }
 }
