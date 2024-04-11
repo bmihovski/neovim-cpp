@@ -29,11 +29,11 @@ M.dap = {
       "<cmd> DapTerminate <CR>",
       "Stop the debugger",
     },
-    ["<leader>q"] = {
+    ["<leader>i"] = {
       "<cmd> lua require'dap'.clear_breakpoints() <CR>",
       "Clear breakpoints",
     },
-    ["<leader>h"] = {
+    ["<leader>o"] = {
       function() require"dap.ui.widgets".hover() end,
       "Variables",
     },

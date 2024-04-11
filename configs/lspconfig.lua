@@ -11,3 +11,21 @@ lspconfig.clangd.setup {
   end,
   capabilities = capabilities,
 }
+
+lspconfig.jdtls.setup {
+    on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    java = {
+      configuration = {
+        runtimes = {
+          {
+            name = "JavaSE-21",
+            path = "~/.sdkman/candidates/java/current",
+            default = true,
+          }
+        }
+      }
+    }
+  }
+}
