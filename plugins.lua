@@ -74,6 +74,14 @@ local plugins = {
       handlers = {}
     },
   },
+  { 
+    "folke/trouble.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      handlers = {}
+    }
+  },
   {
     "folke/neoconf.nvim",
     event = "VeryLazy",
