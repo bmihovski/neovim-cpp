@@ -15,6 +15,7 @@ keymap("n", "<leader>s", "<cmd> CMakeCloseExecutor <CR><cmd> CMakeCloseRunner <C
 keymap("n", "<leader>a", "<cmd> CopilotChatToggle <CR>", { noremap = true, silent = true })
 -- telescope
 keymap("n", "<leader>g", "<cmd> Telescope git_files <CR>", { noremap = true, silent = true })
+keymap("n", "<leader><leader>", "<cmd> lua require('telescope').extensions.recent_files.pick() <CR>", { noremap = true, silent = true })
 -- dap ui icons
 vim.fn.sign_define('DapBreakpoint', { text='🟤', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointCondition', { text='▶️', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })

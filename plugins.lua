@@ -57,6 +57,17 @@ local plugins = {
     }
   },
   {
+    "smartpde/telescope-recent-files",
+    event = "VeryLazy",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    opts = {
+      handlers = {}
+    },
+    config = function()
+      require("telescope").load_extension("recent_files")
+    end
+  },
+  {
     "Civitasv/cmake-tools.nvim",
     event = "VeryLazy",
     opts = {
@@ -71,10 +82,22 @@ local plugins = {
     },
   },
   {
+  "ray-x/lsp_signature.nvim",
+  event = "VeryLazy",
+  opts = {},
+  config = function(_, opts)
+    require'lsp_signature'.setup(opts)
+  end
+  },
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
-      -- add any options here
+      lsp = {
+        signature = {
+          enabled = false,
+        },
+      },
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -100,11 +123,41 @@ local plugins = {
     },
   },
   {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+  },
+  {
+    "AndreM222/copilot-lualine",
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+    config = function ()
+      require("lualine").setup({
+    sections = {
+      lualine_x = {'copilot' ,'encoding', 'fileformat', 'filetype'},
+    },
+    })
+    end,
+  },
+  {
+  "zbirenbaum/copilot.lua",
+  cmd = "Copilot",
+  event = "InsertEnter",
+  config = function()
+    require("copilot").setup()
+  end,
+  },
+  {
     "CopilotC-Nvim/CopilotChat.nvim",
     event = "VeryLazy",
     branch = "canary",
     dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim zbirenbaum/copilot.lua
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     opts = {
