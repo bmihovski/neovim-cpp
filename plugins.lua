@@ -37,7 +37,17 @@ local plugins = {
             'github:mason-org/mason-registry',
           },
         },
-      }
+      },
+      {
+      "williamboman/mason-lspconfig.nvim",
+      opts = {
+        handlers = {
+          ["jdtls"] = function()
+            require("java").setup()
+          end,
+        },
+      },
+    },
     },
   },
   {
@@ -55,6 +65,40 @@ local plugins = {
     opts = {
       handlers = {}
     }
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    dependencies =  {
+        "nvim-telescope/telescope.nvim",
+        "nvim-lua/plenary.nvim"
+    },
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+    config = function()
+        require("telescope").load_extension("lazygit")
+    end,
+},
+  {
+    "https://gitlab.com/yorickpeterse/nvim-pqf.git",
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+    config = function()
+      require("pqf").setup()
+    end
+  },
+  {
+    "akinsho/git-conflict.nvim",
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+    config = function()
+      require("git-conflict").setup()
+    end
   },
   {
     "smartpde/telescope-recent-files",
@@ -145,11 +189,32 @@ local plugins = {
     end,
   },
   {
+    "zbirenbaum/copilot-cmp",
+    event = "InsertEnter",
+    dependencies = { "zbirenbaum/copilot.lua" },
+    config = function ()
+      require("copilot_cmp").setup()
+      require("cmp").setup({
+        sources = {
+          { name = "copilot" },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "buffer" },
+          { name = "nvim_lua" },
+          { name = "path" },
+        },
+        })
+    end,
+  },
+  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      require("copilot").setup()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+        })
     end,
   },
   {
@@ -213,7 +278,7 @@ local plugins = {
         "jdtls",
         "google-java-format",
         "java-debug-adapter"
-      }
+      },
     }
   }
 }

@@ -16,6 +16,7 @@ keymap("n", "<leader>a", "<cmd> CopilotChatToggle <CR>", { noremap = true, silen
 -- telescope
 keymap("n", "<leader>g", "<cmd> Telescope git_files <CR>", { noremap = true, silent = true })
 keymap("n", "<leader><leader>", "<cmd> lua require('telescope').extensions.recent_files.pick() <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>fg", "<cmd> Telescope lazygit <CR>", { noremap = true, silent = true })
 --trouble
 keymap("n", "<leader>xx", "<cmd> lua require('trouble').toggle() <CR>", { noremap = true, silent = true })
 -- dap ui icons
@@ -24,3 +25,14 @@ vim.fn.sign_define('DapBreakpointCondition', { text='▶️', texthl='DapBreakpo
 vim.fn.sign_define('DapBreakpointRejected', { text='', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
 vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
 vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
+-- merge conflict
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'GitConflictDetected',
+  callback = function()
+    vim.notify('Conflict detected in '..vim.fn.expand('<afile>'))
+    vim.keymap.set('n', 'cww', function()
+      engage.conflict_buster()
+      create_buffer_local_mappings()
+    end)
+  end
+})
