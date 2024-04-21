@@ -3,22 +3,37 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.scrolloff = 8
+vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.tabstop = 4
+vim.opt.tabstop = 2
 vim.opt.smartindent = true
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+-- use minus as <Leader> key in shortcuts
+vim.g.mapleader = '-'
+
+---use Backspace as an alias for my Space shortcut prefix so that my stuff can
+-- coexist with LazyVim (which also has Space shortcuts) as I transition over.
+
+
 local keymap = vim.api.nvim_set_keymap
--- cmake run
+keymap("n", "<bs>", "<space>", { noremap = true, silent = true })
+keymap("n", "<C-f>", "<cmd> !tmux neww tmux-sessionizer <CR>", { noremap = true, silent = true })
+ -- cmake run
 keymap("n", "<leader>d", "<cmd> CMakeDebug <CR>", { noremap = true, silent = true })
-keymap("n", "<leader>f", "<cmd> CMakeRun <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>m", "<cmd> CMakeRun <CR>", { noremap = true, silent = true })
 keymap("n", "<leader>s", "<cmd> CMakeCloseExecutor <CR><cmd> CMakeCloseRunner <CR>", { noremap = true, silent = true })
 -- copilot chat
-keymap("n", "<leader>a", "<cmd> CopilotChatToggle <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>t", "<cmd> CopilotChatToggle <CR>", { noremap = true, silent = true })
 -- telescope
-keymap("n", "<leader>g", "<cmd> Telescope git_files <CR>", { noremap = true, silent = true })
-keymap("n", "<leader><leader>", "<cmd> lua require('telescope').extensions.recent_files.pick() <CR>", { noremap = true, silent = true })
-keymap("n", "<leader>fg", "<cmd> Telescope lazygit <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>;", "<cmd> Telescope git_files <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>.", "<cmd> lua require('telescope').extensions.recent_files.pick() <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>ld", "<cmd> Telescope lazygit <CR>", { noremap = true, silent = true })
 --trouble
 keymap("n", "<leader>xx", "<cmd> lua require('trouble').toggle() <CR>", { noremap = true, silent = true })
+-- java test
+keymap("n", "<leader>ht", "<cmd> JavaTestRunCurrentClass <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>ld", "<cmd> JavaTestDebugCurrentClass <CR>", { noremap = true, silent = true })
 -- dap ui icons
 vim.fn.sign_define('DapBreakpoint', { text='🟤', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointCondition', { text='▶️', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })

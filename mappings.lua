@@ -3,7 +3,7 @@ local M = {}
 M.dap = {
   plugin = true,
   n = {
-    ["<leader>db"] = {
+    ["<leader>dd"] = {
       "<cmd> DapToggleBreakpoint <CR>",
       "Add breakpoint at line",
       opts = { }
@@ -25,11 +25,11 @@ M.dap = {
       "<cmd> DapContinue <CR>",
       "Start or continue the debugger",
     },
-    ["<leader>k"] = {
+    ["<leader>f"] = {
       "<cmd> DapTerminate <CR>",
       "Stop the debugger",
     },
-    ["<leader>i"] = {
+    ["<leader>r"] = {
       "<cmd> lua require'dap'.clear_breakpoints() <CR>",
       "Clear breakpoints",
     },

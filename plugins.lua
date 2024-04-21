@@ -19,9 +19,55 @@ local plugins = {
     end
   },
   {
+  "olimorris/persisted.nvim",
+    lazy = false, 
+    config = function()
+      require("persisted").setup({
+        ignored_dirs = {
+          "~/.config",
+          "~/.local/nvim",
+          { "/", exact = true },
+          { "/tmp", exact = true }
+        },
+        autoload = true,
+        on_autoload_no_session = function()
+          vim.notify("No existing session to load.")
+        end
+      })
+
+    end
+  },
+  { "alexghergh/nvim-tmux-navigation",
+    lazy = false,
+    config = function()
+
+        local nvim_tmux_nav = require('nvim-tmux-navigation')
+
+        nvim_tmux_nav.setup {
+            disable_when_zoomed = true -- defaults to false
+        }
+
+        vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+        vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+        vim.keymap.set('n', "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+        vim.keymap.set('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+        vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+        vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+
+    end
+  },
+  {
+    "ThePrimeagen/vim-be-good",
+    event = "VeryLazy",
+  },
+  {
+    "tpope/vim-fugitive",
+    event = "VeryLazy",
+  },
+  {
     'nvim-java/nvim-java',
     event = "VeryLazy",
-    dependencies = {
+   dependencies = {
       'nvim-java/lua-async-await',
       'nvim-java/nvim-java-core',
       'nvim-java/nvim-java-test',
@@ -37,17 +83,7 @@ local plugins = {
             'github:mason-org/mason-registry',
           },
         },
-      },
-      {
-      "williamboman/mason-lspconfig.nvim",
-      opts = {
-        handlers = {
-          ["jdtls"] = function()
-            require("java").setup()
-          end,
-        },
-      },
-    },
+      }
     },
   },
   {
@@ -127,13 +163,6 @@ local plugins = {
     }
   },
   {
-    "folke/neoconf.nvim",
-    event = "VeryLazy",
-    opts = {
-      handlers = {}
-    },
-  },
-  {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
@@ -154,13 +183,6 @@ local plugins = {
   },
   {
     "booperlv/nvim-gomove",
-    event = "VeryLazy",
-    opts = {
-      handlers = {}
-    },
-  },
-  {
-    "karb94/neoscroll.nvim",
     event = "VeryLazy",
     opts = {
       handlers = {}
@@ -260,7 +282,6 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require("neoconf").setup()
       require('java').setup()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
@@ -275,9 +296,7 @@ local plugins = {
         "codelldb",
         "cmakelint",
         "cpptools",
-        "jdtls",
         "google-java-format",
-        "java-debug-adapter"
       },
     }
   }
