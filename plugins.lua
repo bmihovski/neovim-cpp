@@ -60,10 +60,10 @@ local plugins = {
     "ThePrimeagen/vim-be-good",
     event = "VeryLazy",
   },
-  {
-    "tpope/vim-fugitive",
-    event = "VeryLazy",
-  },
+  -- {
+  --   "tpope/vim-fugitive",
+  --   event = "VeryLazy",
+  -- },
   {
     'nvim-java/nvim-java',
     event = "VeryLazy",
@@ -113,7 +113,8 @@ local plugins = {
       handlers = {}
     },
     config = function()
-        require("telescope").load_extension("lazygit")
+      require('lazygit.utils').project_root_dir()
+      require("telescope").load_extension("lazygit")
     end,
 },
   {

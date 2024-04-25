@@ -28,12 +28,15 @@ keymap("n", "<leader>t", "<cmd> CopilotChatToggle <CR>", { noremap = true, silen
 -- telescope
 keymap("n", "<leader>;", "<cmd> Telescope git_files <CR>", { noremap = true, silent = true })
 keymap("n", "<leader>.", "<cmd> lua require('telescope').extensions.recent_files.pick() <CR>", { noremap = true, silent = true })
-keymap("n", "<leader>ld", "<cmd> Telescope lazygit <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>lw", "<cmd> Telescope lazygit <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>8", "<cmd> Telescope live_grep <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>7", "<cmd> Telescope current_buffer_fuzzy_find <CR>", { noremap = true, silent = true })
 --trouble
 keymap("n", "<leader>xx", "<cmd> lua require('trouble').toggle() <CR>", { noremap = true, silent = true })
 -- java test
-keymap("n", "<leader>ht", "<cmd> JavaTestRunCurrentClass <CR>", { noremap = true, silent = true })
-keymap("n", "<leader>ld", "<cmd> JavaTestDebugCurrentClass <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>ht", "<cmd> JavaTestRunCurrentMethod <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>ld", "<cmd> JavaTestDebugCurrentMethod <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>rm", "<cmd> JavaTestViewLastReport <CR>", { noremap = true, silent = true })
 -- dap ui icons
 vim.fn.sign_define('DapBreakpoint', { text='🟤', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointCondition', { text='▶️', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
