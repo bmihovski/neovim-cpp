@@ -19,6 +19,90 @@ local plugins = {
     end
   },
   {
+    "gen740/SmoothCursor.nvim",
+    lazy = false,
+    config = function()
+        require('smoothcursor').setup({
+            autostart = true,
+            cursor = "", -- cursor shape (need nerd font)
+            texthl = "SmoothCursor", -- highlight group, default is { bg = nil, fg = "#FFD400" }
+            linehl = nil, -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
+            type = "default", -- define cursor movement calculate function, "default" or "exp" (exponential).
+            fancy = {
+                enable = false, -- enable fancy mode
+                head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
+                body = {
+                    { cursor = "", texthl = "SmoothCursorRed" },
+                    { cursor = "", texthl = "SmoothCursorOrange" },
+                    { cursor = "●", texthl = "SmoothCursorYellow" },
+                    { cursor = "●", texthl = "SmoothCursorGreen" },
+                    { cursor = "•", texthl = "SmoothCursorAqua" },
+                    { cursor = ".", texthl = "SmoothCursorBlue" },
+                    { cursor = ".", texthl = "SmoothCursorPurple" },
+                },
+                tail = { cursor = nil, texthl = "SmoothCursor" }
+            },
+            flyin_effect = nil, -- "bottom" or "top"
+            speed = 25, -- max is 100 to stick to your current position
+            intervals = 35, -- tick interval
+            priority = 10, -- set marker priority
+            timeout = 3000, -- timout for animation
+            threshold = 3, -- animate if threshold lines jump
+            disable_float_win = false, -- disable on float window
+            enabled_filetypes = nil, -- example: { "lua", "vim" }
+            disabled_filetypes = nil, -- this option will be skipped if enabled_filetypes is set. example: { "TelescopePrompt", "NvimTree" }
+        })
+    end
+  },
+  {
+    "glepnir/lspsaga.nvim",
+    event = "LspAttach",
+    config = function()
+        require("lspsaga").setup({
+            ui = {
+                border = 'rounded',
+            },
+            symbol_in_winbar = {
+                enable = true,
+                separator = '  ',
+                hide_keyword = true,
+                show_file = true,
+                folder_level = 2,
+                respect_root = false,
+                color_mode = true,
+            },
+            request_timeout = 5000,
+        })
+
+    end,
+    dependencies = { { "nvim-tree/nvim-web-devicons" } }
+  },
+  {
+    "aznhe21/actions-preview.nvim",
+    event = "VeryLazy",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-telescope/telescope.nvim" },
+    opts = {
+      handlers = {}
+    },
+    config = function()
+      vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
+    end,
+  },
+  {
+    "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+  },
+  {
+    "saccarosium/nvim-whitespaces",
+    lazy = false,
+    opts = {
+      handlers = {}
+    },
+  },
+  {
     "debugloop/telescope-undo.nvim",
     dependencies = { -- note how they're inverted to above example
       {
@@ -335,11 +419,16 @@ local plugins = {
         "clangd",
         "clang-format",
         "codelldb",
-        "cmakelint",
         "cpptools",
         "google-java-format",
+        "sonarlint-language-server",
+        "dockerls",
+        "jsonls",
+        "lua_ls",
+        "yamlls",
       },
-    }
+    },
+    build = ":MasonUpdate",
   }
 }
 return plugins
