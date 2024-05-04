@@ -19,63 +19,65 @@ local plugins = {
     end
   },
   {
-    "gen740/SmoothCursor.nvim",
-    lazy = false,
-    config = function()
-        require('smoothcursor').setup({
-            autostart = true,
-            cursor = "", -- cursor shape (need nerd font)
-            texthl = "SmoothCursor", -- highlight group, default is { bg = nil, fg = "#FFD400" }
-            linehl = nil, -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
-            type = "default", -- define cursor movement calculate function, "default" or "exp" (exponential).
-            fancy = {
-                enable = false, -- enable fancy mode
-                head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
-                body = {
-                    { cursor = "", texthl = "SmoothCursorRed" },
-                    { cursor = "", texthl = "SmoothCursorOrange" },
-                    { cursor = "●", texthl = "SmoothCursorYellow" },
-                    { cursor = "●", texthl = "SmoothCursorGreen" },
-                    { cursor = "•", texthl = "SmoothCursorAqua" },
-                    { cursor = ".", texthl = "SmoothCursorBlue" },
-                    { cursor = ".", texthl = "SmoothCursorPurple" },
-                },
-                tail = { cursor = nil, texthl = "SmoothCursor" }
-            },
-            flyin_effect = nil, -- "bottom" or "top"
-            speed = 25, -- max is 100 to stick to your current position
-            intervals = 35, -- tick interval
-            priority = 10, -- set marker priority
-            timeout = 3000, -- timout for animation
-            threshold = 3, -- animate if threshold lines jump
-            disable_float_win = false, -- disable on float window
-            enabled_filetypes = nil, -- example: { "lua", "vim" }
-            disabled_filetypes = nil, -- this option will be skipped if enabled_filetypes is set. example: { "TelescopePrompt", "NvimTree" }
-        })
-    end
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
   {
-    "glepnir/lspsaga.nvim",
+      "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+      branch = "main",
+      event = "BufEnter",
+      config = function()
+        require("lsp_lines").setup()
+      end
+  },
+  {
+    "gen740/SmoothCursor.nvim",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+        require("smoothcursor").setup { cursor = "󰀫" }
+
+        vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#8a9baa" })
+
+        local autocmd = vim.api.nvim_create_autocmd
+
+        autocmd({ "ModeChanged" }, {
+          callback = function()
+            local current_mode = vim.fn.mode()
+            if current_mode == "n" then
+              vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#8a9baa" })
+              vim.fn.sign_define("smoothcursor", { text = "󰀫" })
+            elseif current_mode == "v" then
+              vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
+              vim.fn.sign_define("smoothcursor", { text = "" })
+            elseif current_mode == "V" then
+              vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
+              vim.fn.sign_define("smoothcursor", { text = "" })
+            elseif current_mode == "\22" then
+              vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
+              vim.fn.sign_define("smoothcursor", { text = "" })
+            elseif current_mode == "i" then
+              vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#668aab" })
+              vim.fn.sign_define("smoothcursor", { text = "" })
+            end
+          end,
+        })
+      end,
+  },
+  {
+    "nvimdev/lspsaga.nvim",
     event = "LspAttach",
     config = function()
-        require("lspsaga").setup({
-            ui = {
-                border = 'rounded',
-            },
-            symbol_in_winbar = {
-                enable = true,
-                separator = '  ',
-                hide_keyword = true,
-                show_file = true,
-                folder_level = 2,
-                respect_root = false,
-                color_mode = true,
-            },
-            request_timeout = 5000,
-        })
-
+        require('lspsaga').setup({})
     end,
-    dependencies = { { "nvim-tree/nvim-web-devicons" } }
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter', -- optional
+        'nvim-tree/nvim-web-devicons',     -- optional
+    }
   },
   {
     "aznhe21/actions-preview.nvim",

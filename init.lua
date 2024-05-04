@@ -37,6 +37,7 @@ keymap("n", "<leader>xx", "<cmd> lua require('trouble').toggle() <CR>", { norema
 keymap("n", "<leader>ht", "<cmd> JavaTestRunCurrentMethod <CR>", { noremap = true, silent = true })
 keymap("n", "<leader>ld", "<cmd> JavaTestDebugCurrentMethod <CR>", { noremap = true, silent = true })
 keymap("n", "<leader>rm", "<cmd> JavaTestViewLastReport <CR>", { noremap = true, silent = true })
+keymap("n", "<F6>", "<cmd> MarkdownPreviewToggle<CR>", { noremap = true, silent = true })
 -- dap ui icons
 vim.fn.sign_define('DapBreakpoint', { text='🟤', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointCondition', { text='▶️', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
