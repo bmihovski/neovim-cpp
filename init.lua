@@ -34,9 +34,25 @@ keymap("n", "<leader>7", "<cmd> Telescope current_buffer_fuzzy_find <CR>", { nor
 --trouble
 keymap("n", "<leader>xx", "<cmd> lua require('trouble').toggle() <CR>", { noremap = true, silent = true })
 -- java test
-keymap("n", "<leader>ht", "<cmd> JavaTestRunCurrentMethod <CR>", { noremap = true, silent = true })
-keymap("n", "<leader>ld", "<cmd> JavaTestDebugCurrentMethod <CR>", { noremap = true, silent = true })
-keymap("n", "<leader>rm", "<cmd> JavaTestViewLastReport <CR>", { noremap = true, silent = true })
+keymap("n", "<A-o>", "<Cmd>lua require'jdtls'.organize_imports()<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>jv", "<Cmd>lua require('jdtls').extract_variable()<CR>", { noremap = true, silent = true })
+keymap("x", "<leader>jv", "<Cmd>lua require('jdtls').extract_variable(true)<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>jw", "<Cmd>lua require('jdtls').extract_constant()<CR>", { noremap = true, silent = true })
+keymap("x", "<leader>jw", "<Cmd>lua require('jdtls').extract_constant(true)<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>jt", "<Cmd>lua require('jdtls').test_nearest_method()<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>jd", "<Cmd>lua require'jdtls'.test_class()<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>ju", "<Cmd>JdtUpdateConfig<CR>", { noremap = true, silent = true })
+
+keymap("v", "<leader>jv", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", { noremap = true, silent = true })
+keymap("v", "<leader>jw", "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", { noremap = true, silent = true })
+keymap("v", "<leader>jm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", { noremap = true, silent = true })
+keymap("x", "<leader>jm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>jl", "<Cmd>lua function() vim.lsp.buf.incoming_calls() end<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>jp", "<Cmd>lua require('jdtls').super_implementation<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>js", "<Cmd>lua require('jdtls').jshell()<CR>", { noremap = true, silent = true })
+-- keymap("n", "<leader>ht", "<cmd> JavaTestRunCurrentMethod <CR>", { noremap = true, silent = true })
+-- keymap("n", "<leader>ld", "<cmd> JavaTestDebugCurrentMethod <CR>", { noremap = true, silent = true })
+-- keymap("n", "<leader>rm", "<cmd> JavaTestViewLastReport <CR>", { noremap = true, silent = true })
 keymap("n", "<F6>", "<cmd> MarkdownPreviewToggle<CR>", { noremap = true, silent = true })
 -- dap ui icons
 vim.fn.sign_define('DapBreakpoint', { text='🟤', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
