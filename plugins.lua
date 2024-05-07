@@ -875,6 +875,7 @@ local plugins = {
           cpp = { "cpplint" },
           kotlin = { "ktlint" },
           terraform = { "tflint" },
+          python = { "ruff" },
           java = { "checkstyle" },
         }
 
@@ -907,6 +908,13 @@ local plugins = {
         formatters_by_ft = {
           lua = { "stylua" },
           cpp = { "clang-format " },
+          python = function(bufnr)
+            if require("conform").get_formatter_info("ruff_format", bufnr).available then
+              return { "ruff_format" }
+            else
+              return { "isort", "black" }
+            end
+          end,
           javascript = { { "prettierd", "prettier" } },
           typescript = { { "prettierd", "prettier" } },
           javascriptreact = { { "prettierd", "prettier" } },
@@ -976,10 +984,82 @@ local plugins = {
           "beautysh",
           "yamlfix",
           "prettierd",
+          "ruff",
+          "pyright",
+          "ruff-lsp",
           "prettier",
+          "debugpy", -- debugger
+          "black", -- formatter
+          "isort", -- organize imports
+          "taplo", -- LSP for toml (for pyproject.toml files)
         },
+        automatic_installation = true,
       })
     end,
+  },
+  {
+  "mfussenegger/nvim-dap-python",
+    ft = { "python" },
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function()
+      -- uses the debugypy installation by mason
+      local path = require("mason-registry").get_package("debugpy"):get_install_path()
+      require("dap-python").setup(path .. "/venv/bin/python")
+    end,
+    keys = {
+      {
+        "<leader>kw",
+        function()
+          require("dap-python").test_method()
+        end,
+        desc = "Test method",
+      },
+      {
+        "<leader>kf",
+        function()
+          require("dap-python").test_class()
+        end,
+        desc = "Test class",
+      },
+      {
+        "<leader>ks",
+        function()
+          require("dap-python").debug_selection()
+        end,
+        mode = "v",
+        desc = "Debug selection",
+      },
+     },
+  },
+  -- auto pairing
+  { "echasnovski/mini.pairs", event="VeryLazy",
+    config = function(_, opts)
+      require('mini.pairs').setup(opts)
+    end
+  },
+
+  -- surround text object
+  { "echasnovski/mini.surround",
+    config = function(_, opts)
+      require('mini.surround').setup(opts)
+    end
+  },
+
+  -- show indent guides on blank lines
+  { "lukas-reineke/indent-blankline.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      show_current_context = true,
+    }
+  },
+  {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
+    event = 'VeryLazy'
   }
 }
 return plugins
