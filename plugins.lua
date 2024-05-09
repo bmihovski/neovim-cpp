@@ -1010,30 +1010,6 @@ local plugins = {
       local path = require("mason-registry").get_package("debugpy"):get_install_path()
       require("dap-python").setup(path .. "/venv/bin/python")
     end,
-    keys = {
-      {
-        "<leader>kw",
-        function()
-          require("dap-python").test_method()
-        end,
-        desc = "Test method",
-      },
-      {
-        "<leader>kf",
-        function()
-          require("dap-python").test_class()
-        end,
-        desc = "Test class",
-      },
-      {
-        "<leader>ks",
-        function()
-          require("dap-python").debug_selection()
-        end,
-        mode = "v",
-        desc = "Debug selection",
-      },
-     },
   },
   -- auto pairing
   { "echasnovski/mini.pairs", event="VeryLazy",
@@ -1057,9 +1033,14 @@ local plugins = {
     }
   },
   {
-    "linux-cultist/venv-selector.nvim",
-    dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
-    event = 'VeryLazy'
+  "linux-cultist/venv-selector.nvim",
+  dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+  opts = {
+    -- Your options go here
+    -- name = "venv",
+    -- auto_refresh = false
+  },
+  event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   }
 }
 return plugins

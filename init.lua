@@ -55,9 +55,11 @@ keymap("n", "<leader>js", "<Cmd>lua require('jdtls').jshell()<CR>", { noremap = 
 -- keymap("n", "<leader>rm", "<cmd> JavaTestViewLastReport <CR>", { noremap = true, silent = true })
 keymap("n", "<F6>", "<cmd> MarkdownPreviewToggle<CR>", { noremap = true, silent = true })
 -- python
-keymap("n", "<leader>vb", "<cmd>VenvSelect<CR>", { noremap = true, silent = true })
-keymap("n", "<leader>vc", "<cmd>VenvSelectCached<CR>", { noremap = true, silent = true })
-
+keymap("n", "<leader>vl", "<cmd>VenvSelect<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>vh", "<cmd>VenvSelectCached<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>kw", "<cmd>lua require('dap-python').test_method()<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>kf", "<cmd>lua require('dap-python').test_class()<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>ks", "<cmd>lua require('dap-python').debug_selection()<CR>", { noremap = true, silent = true })
 -- dap ui icons
 vim.fn.sign_define('DapBreakpoint', { text='🟤', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointCondition', { text='▶️', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
