@@ -948,9 +948,12 @@ local plugins = {
     "williamboman/mason.nvim",
     dependencies = {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
     },
     config = function()
       local mason = require("mason")
+      require("mason-lspconfig").setup()
 
       local mason_tool_installer = require("mason-tool-installer")
 
@@ -994,6 +997,10 @@ local plugins = {
           "taplo", -- LSP for toml (for pyproject.toml files)
         },
         automatic_installation = true,
+        integrations = {
+          ["mason-lspconfig"] = true,
+          ["mason-nvim-dap"] = true,
+        }
       })
     end,
   },
