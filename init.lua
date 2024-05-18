@@ -14,7 +14,7 @@ vim.g.mapleader = '-'
 
 ---use Backspace as an alias for my Space shortcut prefix so that my stuff can
 -- coexist with LazyVim (which also has Space shortcuts) as I transition over.
-
+vim.cmd([[silent! runtime plugin/rplugin.vim]])
 
 local keymap = vim.api.nvim_set_keymap
 keymap("n", "<bs>", "<space>", { noremap = true, silent = true })
@@ -31,6 +31,9 @@ keymap("n", "<leader>.", "<cmd> lua require('telescope').extensions.recent_files
 keymap("n", "<leader>lw", "<cmd> Telescope lazygit <CR>", { noremap = true, silent = true })
 keymap("n", "<leader>8", "<cmd> Telescope live_grep <CR>", { noremap = true, silent = true })
 keymap("n", "<leader>7", "<cmd> Telescope current_buffer_fuzzy_find <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>z", "<cmd> lua require('telescope').extensions.zoxide.list({picker_opts})<CR>", { noremap = true, silent = true })
+-- outline symbols
+keymap("n", "<F5>", "<Cmd>SymbolsOutline<CR>", { noremap = true, silent = true })
 --trouble
 keymap("n", "<leader>xx", "<cmd> lua require('trouble').toggle() <CR>", { noremap = true, silent = true })
 -- java test

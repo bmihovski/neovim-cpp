@@ -704,6 +704,21 @@ local plugins = {
     end,
   },
   {
+    "jvgrootveld/telescope-zoxide",
+    dependencies =  {
+        "nvim-lua/popup.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim"
+    },
+    event = "VeryLazy",
+    opts = {
+      handlers = {}
+    },
+    config = function()
+      require("telescope").load_extension("zoxide")
+    end,
+  },
+  {
     "https://gitlab.com/yorickpeterse/nvim-pqf.git",
     event = "VeryLazy",
     opts = {
@@ -753,11 +768,6 @@ local plugins = {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
-      lsp = {
-        signature = {
-          enabled = false,
-        },
-      },
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -1027,6 +1037,11 @@ local plugins = {
   { "echasnovski/mini.pairs", event="VeryLazy",
     config = function(_, opts)
       require('mini.pairs').setup(opts)
+    end
+  },
+  { "simrat39/symbols-outline.nvim", event="VeryLazy",
+    config = function(_, opts)
+      require('symbols-outline').setup(opts)
     end
   },
 
