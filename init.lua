@@ -19,6 +19,7 @@ vim.cmd([[silent! runtime plugin/rplugin.vim]])
 local keymap = vim.api.nvim_set_keymap
 keymap("n", "<bs>", "<space>", { noremap = true, silent = true })
 keymap("n", "<C-f>", "<cmd> !tmux neww tmux-sessionizer <CR>", { noremap = true, silent = true })
+keymap("n", "<leader>zz", "<cmd> ZenMode<CR>", { noremap = true, silent = true })
  -- cmake run
 keymap("n", "<leader>d", "<cmd> CMakeDebug <CR>", { noremap = true, silent = true })
 keymap("n", "<leader>m", "<cmd> CMakeRun <CR>", { noremap = true, silent = true })

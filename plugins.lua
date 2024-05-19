@@ -162,10 +162,10 @@ local plugins = {
 
           local opts = { buffer = ev.buf }
           vim.keymap.set('n', 'gd', '<cmd>Lspsaga goto_definition<cr>', opts)
-          vim.keymap.set('n', '<space>r', vim.lsp.buf.rename, opts)
+          vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
           vim.keymap.set(
             { 'n', 'v' },
-            '<space>ca',
+            '<leader>ca',
             '<cmd>Lspsaga code_action<cr>',
             opts
           )
@@ -1039,7 +1039,7 @@ local plugins = {
       require('mini.pairs').setup(opts)
     end
   },
-  { "simrat39/symbols-outline.nvim", event="VeryLazy",
+  { "rockerBOO/symbols-outline.nvim", event="VeryLazy",
     config = function(_, opts)
       require('symbols-outline').setup(opts)
     end
@@ -1051,14 +1051,6 @@ local plugins = {
       require('mini.surround').setup(opts)
     end
   },
-
-  -- show indent guides on blank lines
-  { "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      show_current_context = true,
-    }
-  },
   {
   "linux-cultist/venv-selector.nvim",
   dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
@@ -1068,6 +1060,11 @@ local plugins = {
     -- auto_refresh = false
   },
   event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
+  },
+  {
+    "folke/zen-mode.nvim",
+    dependencies = { "folke/twilight.nvim" },
+    event = "VeryLazy",
   }
 }
 return plugins
