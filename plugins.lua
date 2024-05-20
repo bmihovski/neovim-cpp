@@ -299,13 +299,17 @@ local plugins = {
       require("telescope").load_extension("undo")
     end,
   },
+  -- auto save
   {
     "okuuva/auto-save.nvim",
-    cmd = "ASToggle", -- optional for lazy loading on command
+    cmd = "ASToggle",                         -- optional for lazy loading on command
     event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
     opts = {
-      handlers = {}
-    }
+      execution_message = {
+        enabled = false
+      },
+      debounce_delay = 5000,
+    },
   },
   {
   "olimorris/persisted.nvim",
@@ -905,7 +909,31 @@ local plugins = {
     },
   {
     "neovim/nvim-lspconfig",
+    dependencies = { "VonHeikemen/lsp-zero.nvim" },
     config = function()
+      local lsp_zero = require('lsp-zero')
+
+      lsp_zero.on_attach(function(client, bufnr)
+        -- see :help lsp-zero-keybindings
+        -- to learn the available actions
+        lsp_zero.default_keymaps({buffer = bufnr})
+      end)
+
+      --  DIAGNOSTICS CONFIG FROM NVIM-LSPCONFIG --- https://github.com/neovim/nvim-lspconfig
+      vim.diagnostic.config({
+        virtual_text = {
+          source = "always",  -- Or "if_many"
+          prefix = '●', -- Could be '■', '▎', 'x'
+        },
+        signs = true,
+        update_in_insert = false,
+        underline = true,
+        severity_sort = false,
+        float = {source="always"},
+      })
+      vim.cmd("hi DiagnosticError guifg=#ab6d79")
+      vim.cmd("hi DiagnosticInfo guifg=#8c7ca6")
+      vim.cmd("hi DiagnosticHint guifg=#8c7ca6")
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
     end,
@@ -959,31 +987,9 @@ local plugins = {
       end, { desc = "Format file or range (in visual mode)" })
     end,
     },
-  {
+   {
     "williamboman/mason.nvim",
-    dependencies = {
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    config = function()
-      local mason = require("mason")
-      require("mason-lspconfig").setup()
-
-      local mason_tool_installer = require("mason-tool-installer")
-
-      -- enable mason and configure icons
-      mason.setup({
-        ui = {
-          icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
-          },
-        },
-      })
-
-      mason_tool_installer.setup({
+      opts = {
         ensure_installed = {
           "ktlint",
           "clangd",
@@ -1010,14 +1016,8 @@ local plugins = {
           "black", -- formatter
           "isort", -- organize imports
           "taplo", -- LSP for toml (for pyproject.toml files)
-        },
-        automatic_installation = true,
-        integrations = {
-          ["mason-lspconfig"] = true,
-          ["mason-nvim-dap"] = true,
+          }
         }
-      })
-    end,
   },
   {
   "mfussenegger/nvim-dap-python",
@@ -1065,6 +1065,22 @@ local plugins = {
     "folke/zen-mode.nvim",
     dependencies = { "folke/twilight.nvim" },
     event = "VeryLazy",
+  },
+  {
+      "tris203/hawtkeys.nvim",
+      cmd = { "Hawtkeys", "HawtkeysAll", "HawtkeysDupes" },
+      config = true,
+      dependencies = {
+          "nvim-lua/plenary.nvim",
+          "nvim-treesitter/nvim-treesitter",
+      },
+  },
+  {
+    'simaxme/java.nvim',
+    event = "VeryLazy",
+    opts = {
+      -- your options here
+    }
   }
 }
 return plugins
