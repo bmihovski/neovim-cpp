@@ -639,7 +639,7 @@ local plugins = {
               template = '${object.className}{${member.name()}=${member.value}, ${otherMembers}}',
             },
             useBlocks = true,
-          },
+          },  
         }
 
         -- This starts a new client & server,
@@ -909,31 +909,7 @@ local plugins = {
     },
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "VonHeikemen/lsp-zero.nvim" },
     config = function()
-      local lsp_zero = require('lsp-zero')
-
-      lsp_zero.on_attach(function(client, bufnr)
-        -- see :help lsp-zero-keybindings
-        -- to learn the available actions
-        lsp_zero.default_keymaps({buffer = bufnr})
-      end)
-
-      --  DIAGNOSTICS CONFIG FROM NVIM-LSPCONFIG --- https://github.com/neovim/nvim-lspconfig
-      vim.diagnostic.config({
-        virtual_text = {
-          source = "always",  -- Or "if_many"
-          prefix = '●', -- Could be '■', '▎', 'x'
-        },
-        signs = true,
-        update_in_insert = false,
-        underline = true,
-        severity_sort = false,
-        float = {source="always"},
-      })
-      vim.cmd("hi DiagnosticError guifg=#ab6d79")
-      vim.cmd("hi DiagnosticInfo guifg=#8c7ca6")
-      vim.cmd("hi DiagnosticHint guifg=#8c7ca6")
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
     end,
@@ -1066,6 +1042,14 @@ local plugins = {
     dependencies = { "folke/twilight.nvim" },
     event = "VeryLazy",
   },
+  -- {
+  -- "zeioth/garbage-day.nvim",
+  -- dependencies = "neovim/nvim-lspconfig",
+  -- event = "VeryLazy",
+  -- opts = {
+  --   -- your options here
+  -- }
+  -- },
   {
       "tris203/hawtkeys.nvim",
       cmd = { "Hawtkeys", "HawtkeysAll", "HawtkeysDupes" },
@@ -1076,11 +1060,30 @@ local plugins = {
       },
   },
   {
+    'VidocqH/lsp-lens.nvim',
+    event = "VeryLazy",
+    config = function()
+      require'lsp-lens'.setup()
+    end
+  },
+  {
+    "Badhi/nvim-treesitter-cpp-tools",
+    event = "VeryLazy",
+    dependencies = { "nvim-treesitter" },
+    config = function()
+      require("nt-cpp-tools").setup {
+        header_extension = "h",
+        source_extension = "cpp",
+      }
+    end,
+    cmd = { "TSCppDefineClassFunc", "TSCppMakeConcreteClass", "TSCppRuleOf3", "TSCppRuleOf5" },
+  },
+  {
     'simaxme/java.nvim',
     event = "VeryLazy",
-    opts = {
-      -- your options here
-    }
+    config = function()
+      require'java'.setup()
+    end
   }
 }
 return plugins
